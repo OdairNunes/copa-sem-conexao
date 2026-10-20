@@ -1,60 +1,145 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Copa Sem Conexão</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #101414;
-      color: white;
+      color: #fff;
+      background-color: #080a09;
+      background-image:
+        linear-gradient(rgba(5, 8, 7, 0.65), rgba(5, 8, 7, 0.78)),
+        url("imagens/fundo-copa.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
     }
+
     header {
-      background: #182522;
-      padding: 30px 15px;
+      padding: 28px 16px;
       text-align: center;
-      border-bottom: 3px solid #a6ff4d;
+      background: rgba(5, 8, 7, 0.65);
+      border-bottom: 3px solid #f5c542;
     }
-    h1 { margin: 0; }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 5vw, 38px);
+      letter-spacing: 1px;
+    }
+
+    header p {
+      color: #ddd;
+      margin-bottom: 0;
+    }
+
     main {
-      max-width: 600px;
-      margin: 35px auto;
+      max-width: 650px;
+      margin: 30px auto;
       padding: 16px;
     }
-    h2 { color: #a6ff4d; }
+
+    h2 {
+      color: #f5c542;
+    }
+
+    .tabela-container {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #19201e;
-      border-radius: 10px;
-      overflow: hidden;
+      background: rgba(12, 16, 15, 0.91);
     }
+
     th, td {
-      padding: 16px 12px;
+      padding: 12px 10px;
       border-bottom: 1px solid #35413b;
     }
+
     th {
-      color: #a6ff4d;
+      color: #f5c542;
       text-align: left;
+      font-size: 13px;
+      text-transform: uppercase;
     }
-    th:last-child, td:last-child {
+
+    th:last-child,
+    td:last-child {
       text-align: right;
     }
+
+    .jogador {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      border: 2px solid #f5c542;
+      flex-shrink: 0;
+    }
+
     .pontos {
-      font-size: 20px;
+      color: #a6ff4d;
+      font-size: 22px;
       font-weight: bold;
     }
+
+    tbody tr:hover {
+      background: rgba(245, 197, 66, 0.08);
+    }
+
     footer {
       text-align: center;
       padding: 25px;
-      color: #aab5ae;
+      color: #ddd;
+      font-size: 13px;
+    }
+
+    @media (max-width: 420px) {
+      main {
+        padding: 10px;
+      }
+
+      th, td {
+        padding: 10px 7px;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+      }
+
+      .jogador {
+        gap: 8px;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <h1>⚽ COPA SEM CONEXÃO</h1>
     <p>Classificação oficial</p>
@@ -62,39 +147,89 @@
 
   <main>
     <h2>🏆 Pontuação</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Jogador</th>
-          <th>Pontos</th>
-        </tr>
-      </thead>
-      <tbody id="classificacao"></tbody>
-    </table>
+
+    <div class="tabela-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Jogador</th>
+            <th>Pontos</th>
+          </tr>
+        </thead>
+
+        <tbody id="classificacao"></tbody>
+      </table>
+    </div>
   </main>
 
-  <footer>Copa Sem Conexão © 2026</footer>
+  <footer>
+    Copa Sem Conexão © 2026
+  </footer>
 
   <script>
+    // EDITE A PONTUAÇÃO NESTA LISTA.
+    // Os jogadores serão ordenados do maior para o menor número de pontos.
+
     const jogadores = [
-      { nome: "ALANY", pontos: 0 },
-      { nome: "RAMON", pontos: 0 },
-      { nome: "ODAIR", pontos: 0 },
-      { nome: "TIAGO", pontos: 0 },
-      { nome: "ERNANDO", pontos: 0 },
-      { nome: "MATHEUS", pontos: 0 },
-      { nome: "DOUGLAS", pontos: 0 }
+      {
+        nome: "ALANY",
+        pontos: 0,
+        imagem: "imagens/alany.png"
+      },
+      {
+        nome: "RAMON",
+        pontos: 0,
+        imagem: "imagens/ramon.png"
+      },
+      {
+        nome: "ODAIR",
+        pontos: 0,
+        imagem: "imagens/odair.png"
+      },
+      {
+        nome: "TIAGO",
+        pontos: 0,
+        imagem: "imagens/tiago.png"
+      },
+      {
+        nome: "ERNANDO",
+        pontos: 0,
+        imagem: "imagens/ernando.png"
+      },
+      {
+        nome: "MATHEUS",
+        pontos: 0,
+        imagem: "imagens/matheus.png"
+      },
+      {
+        nome: "DOUGLAS",
+        pontos: 0,
+        imagem: "imagens/douglas.png"
+      }
     ];
 
-    jogadores.sort((a, b) => b.pontos - a.pontos);
+    jogadores.sort(
+      (a, b) => b.pontos - a.pontos
+    );
 
     document.getElementById("classificacao").innerHTML =
       jogadores.map(j => `
         <tr>
-          <td>${j.nome}</td>
+          <td>
+            <div class="jogador">
+              <img
+                class="avatar"
+                src="${j.imagem}"
+                alt="Avatar de ${j.nome}"
+              >
+              <span>${j.nome}</span>
+            </div>
+          </td>
+
           <td class="pontos">${j.pontos}</td>
         </tr>
       `).join("");
   </script>
+
 </body>
 </html>
