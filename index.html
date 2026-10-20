@@ -14,91 +14,85 @@
     }
     header {
       background: #182522;
-      padding: 28px 16px;
+      padding: 30px 15px;
       text-align: center;
       border-bottom: 3px solid #a6ff4d;
     }
     h1 { margin: 0; }
-    header p { color: #c4d0c9; }
     main {
-      max-width: 900px;
-      margin: 30px auto;
+      max-width: 600px;
+      margin: 35px auto;
       padding: 16px;
     }
     h2 { color: #a6ff4d; }
-    .table-wrap { overflow-x: auto; }
     table {
       width: 100%;
       border-collapse: collapse;
       background: #19201e;
+      border-radius: 10px;
+      overflow: hidden;
     }
     th, td {
-      padding: 13px 10px;
+      padding: 16px 12px;
       border-bottom: 1px solid #35413b;
-      text-align: center;
     }
-    th { color: #a6ff4d; }
-    td:nth-child(2) { text-align: left; }
+    th {
+      color: #a6ff4d;
+      text-align: left;
+    }
+    th:last-child, td:last-child {
+      text-align: right;
+    }
+    .pontos {
+      font-size: 20px;
+      font-weight: bold;
+    }
     footer {
       text-align: center;
-      color: #aab5ae;
       padding: 25px;
+      color: #aab5ae;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>⚽ COPA SEM CONEXÃO</h1>
-    <p>Competição, rivalidade e futebol.</p>
+    <p>Classificação oficial</p>
   </header>
 
   <main>
-    <h2>Classificação</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Pos.</th>
-            <th>Time</th>
-            <th>PTS</th>
-            <th>J</th>
-            <th>V</th>
-            <th>E</th>
-            <th>D</th>
-            <th>SG</th>
-          </tr>
-        </thead>
-        <tbody id="classificacao"></tbody>
-      </table>
-    </div>
-    <p id="mensagem">Classificação inicial da competição.</p>
+    <h2>🏆 Pontuação</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Jogador</th>
+          <th>Pontos</th>
+        </tr>
+      </thead>
+      <tbody id="classificacao"></tbody>
+    </table>
   </main>
 
   <footer>Copa Sem Conexão © 2026</footer>
 
   <script>
-    const times = [
-      { nome: "Time 1", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 },
-      { nome: "Time 2", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 },
-      { nome: "Time 3", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 },
-      { nome: "Time 4", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 }
+    const jogadores = [
+      { nome: "ALANY", pontos: 0 },
+      { nome: "RAMON", pontos: 0 },
+      { nome: "ODAIR", pontos: 0 },
+      { nome: "TIAGO", pontos: 0 },
+      { nome: "ERNANDO", pontos: 0 },
+      { nome: "MATHEUS", pontos: 0 },
+      { nome: "DOUGLAS", pontos: 0 }
     ];
 
-    times.sort((a, b) =>
-      b.pts - a.pts || b.v - a.v || b.sg - a.sg
-    );
+    jogadores.sort((a, b) => b.pontos - a.pontos);
 
     document.getElementById("classificacao").innerHTML =
-      times.map((t, i) => `
+      jogadores.map(j => `
         <tr>
-          <td>${i + 1}</td>
-          <td>${t.nome}</td>
-          <td>${t.pts}</td>
-          <td>${t.j}</td>
-          <td>${t.v}</td>
-          <td>${t.e}</td>
-          <td>${t.d}</td>
-          <td>${t.sg}</td>
+          <td>${j.nome}</td>
+          <td class="pontos">${j.pontos}</td>
         </tr>
       `).join("");
   </script>
