@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copa Sem Conexão</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101414;
+      color: white;
+    }
+    header {
+      background: #182522;
+      padding: 28px 16px;
+      text-align: center;
+      border-bottom: 3px solid #a6ff4d;
+    }
+    h1 { margin: 0; }
+    header p { color: #c4d0c9; }
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 16px;
+    }
+    h2 { color: #a6ff4d; }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #19201e;
+    }
+    th, td {
+      padding: 13px 10px;
+      border-bottom: 1px solid #35413b;
+      text-align: center;
+    }
+    th { color: #a6ff4d; }
+    td:nth-child(2) { text-align: left; }
+    footer {
+      text-align: center;
+      color: #aab5ae;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⚽ COPA SEM CONEXÃO</h1>
+    <p>Competição, rivalidade e futebol.</p>
+  </header>
+
+  <main>
+    <h2>Classificação</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Pos.</th>
+            <th>Time</th>
+            <th>PTS</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>SG</th>
+          </tr>
+        </thead>
+        <tbody id="classificacao"></tbody>
+      </table>
+    </div>
+    <p id="mensagem">Classificação inicial da competição.</p>
+  </main>
+
+  <footer>Copa Sem Conexão © 2026</footer>
+
+  <script>
+    const times = [
+      { nome: "Time 1", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 },
+      { nome: "Time 2", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 },
+      { nome: "Time 3", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 },
+      { nome: "Time 4", pts: 0, j: 0, v: 0, e: 0, d: 0, sg: 0 }
+    ];
+
+    times.sort((a, b) =>
+      b.pts - a.pts || b.v - a.v || b.sg - a.sg
+    );
+
+    document.getElementById("classificacao").innerHTML =
+      times.map((t, i) => `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${t.nome}</td>
+          <td>${t.pts}</td>
+          <td>${t.j}</td>
+          <td>${t.v}</td>
+          <td>${t.e}</td>
+          <td>${t.d}</td>
+          <td>${t.sg}</td>
+        </tr>
+      `).join("");
+  </script>
+</body>
+</html>
